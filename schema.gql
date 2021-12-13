@@ -1,0 +1,77 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""recipe """
+type Recipe {
+  id: ID!
+  title: String!
+  description: String
+  creationDate: Date!
+  ingredients: [String!]!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+"""man"""
+type Man {
+  id: ID!
+  name: String!
+  position: String!
+  cat: Cat!
+}
+
+"""cat"""
+type Cat {
+  id: ID!
+  name: String!
+  age: Float
+  color: String!
+  men: [Man!]
+}
+
+type Query {
+  recipe(id: String!): Recipe!
+  recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
+  cat(id: Float!): Cat!
+  cats: [Cat!]!
+  man(id: Float!): Man!
+  men: [Man!]!
+}
+
+type Mutation {
+  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
+  removeRecipe(id: String!): Boolean!
+  addCat(newCatData: NewCatInput!): Cat!
+  addMan(newManData: NewManInput!): Man!
+}
+
+input NewRecipeInput {
+  title: String!
+  description: String
+  ingredients: [String!]!
+}
+
+input NewCatInput {
+  name: String!
+  age: Float
+  color: String!
+}
+
+input NewManInput {
+  name: String!
+  position: String!
+  cat: CatInputModel!
+}
+
+"""cat"""
+input CatInputModel {
+  id: ID!
+}
+
+type Subscription {
+  recipeAdded: Recipe!
+  catAdded: Cat!
+  manAdded: Man!
+}
